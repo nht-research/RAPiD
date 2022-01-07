@@ -44,7 +44,7 @@ if __name__ == '__main__':
     # dataloader setting
     batch_size = args.batch_size
     num_cpu = 0 if batch_size == 1 else 4
-    subdivision = 128 // batch_size
+    subdivision = max(128 // batch_size, 1)
     enable_aug = True
     multiscale = True
     multiscale_interval = 10
@@ -54,9 +54,9 @@ if __name__ == '__main__':
     # dataset setting
     print('initialing dataloader...')
     if args.dataset == 'COCO':
-        train_img_dir = '../Datasets/COCO/train2017'
+        train_img_dir = '../../datasets/coco/train2017'
         assert 'COCO' in train_img_dir # issue #11
-        train_json = '../Datasets/COCO/annotations/instances_train2017.json'
+        train_json = '../../datasets/coco/annotations/instances_train2017.json'
         val_img_dir = './images/tiny_val/one'
         val_json = './images/tiny_val/one.json'
         lr_SGD = 0.001 / batch_size / subdivision
