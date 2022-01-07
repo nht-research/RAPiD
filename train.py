@@ -180,7 +180,9 @@ if __name__ == '__main__':
         from models.rapid import RAPiD
         model = RAPiD(backbone=args.backbone, img_norm=False,
                        loss_angle='period_L2')
-    
+    else:
+        raise ValueError(f'Invalid model name: {args.model}')
+
     model = model.cuda()
 
     start_iter = -1
