@@ -324,9 +324,14 @@ def iou_rle(boxes1, boxes2, xywha, is_degree=True, **kwargs):
     if boxes2.dim() == 1:
         boxes2 = boxes2.unsqueeze(0)
     assert boxes1.shape[1] == boxes2.shape[1] == 5
-    
+
     size = kwargs.get('img_size', 2048)
-    h,w = size,size if isinstance(size, int) else size
+    if isinstance(size, (int, float)):
+        h,w = size,size
+    else:
+        h,w = size
+        assert isinstance(h, int), f'{h}, {type(h)}'
+        assert isinstance(w, int), f'{w}, {type(w)}'
     h, w = float(h), float(w)
     if 'normalized' in kwargs and kwargs['normalized'] == True:
         # the [x,y,w,h] are between 0~1
