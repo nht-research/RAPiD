@@ -218,7 +218,7 @@ class PredLayer(nn.Module):
         ti_all = tx_all.long()
         tj_all = ty_all.long()
 
-        _hw = torch.Tensor([img_hw[0], img_hw[1]], device=device).view(1,2)
+        _hw = torch.Tensor([img_hw[0], img_hw[1]]).view(1,2).to(device=device)
         norm_anch_wh = anchors[:,0:2] / _hw # normalized
         norm_anch_00wha = self.anch_00wha_all.clone().to(device=device)
         norm_anch_00wha[:,2:4] /= _hw # normalized
