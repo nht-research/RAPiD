@@ -130,7 +130,7 @@ class Dataset4YoloAngle(torch.utils.data.Dataset):
         # img_name = self.imgid2info[img_id]['file_name']
         # img_path = os.path.join(self.img_dir, img_name)
         img_path = self.imgid2path[img_id]
-        self.coco = True if 'COCO' in img_path else False
+        self.coco = True if ('COCO' in img_path or 'coco' in img_path) else False
         img = Image.open(img_path)
         ori_w, ori_h = img.width, img.height
         if img.mode == 'L':
